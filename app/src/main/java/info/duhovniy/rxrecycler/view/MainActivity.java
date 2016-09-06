@@ -1,4 +1,4 @@
-package info.duhovniy.rxrecycler;
+package info.duhovniy.rxrecycler.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import info.duhovniy.rxrecycler.R;
+import info.duhovniy.rxrecycler.ReAdapter;
 import info.duhovniy.rxrecycler.databinding.ActivityMainBinding;
 import info.duhovniy.rxrecycler.model.Item;
 

@@ -15,9 +15,7 @@ import java.util.List;
 import info.duhovniy.rxrecycler.databinding.ListItemBinding;
 import info.duhovniy.rxrecycler.model.Item;
 
-/**
- * Created by nickelAdmin on 05/09/2016.
- */
+
 public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ItemViewHolder> {
 
     private List<Item> items;
@@ -37,11 +35,11 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ItemViewHolder> {
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ListItemBinding binding = ListItemBinding.inflate(
+        ListItemBinding mBinding = ListItemBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false);
-        return new ItemViewHolder(binding);
+        return new ItemViewHolder(mBinding);
     }
 
     @Override
@@ -56,7 +54,7 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ItemViewHolder> {
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
-        ListItemBinding binding;
+        final ListItemBinding binding;
 
         public ItemViewHolder(ListItemBinding binding) {
             super(binding.cardView);
