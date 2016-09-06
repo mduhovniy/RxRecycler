@@ -1,8 +1,8 @@
 package info.duhovniy.rxrecycler;
 
 import android.databinding.BindingAdapter;
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,7 +18,7 @@ import info.duhovniy.rxrecycler.model.Item;
 /**
  * Created by nickelAdmin on 05/09/2016.
  */
-public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ViewHolder> {
+public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ItemViewHolder> {
 
     private List<Item> items;
 
@@ -36,17 +36,18 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ViewHolder> {
     }
 
     @Override
-    public ReAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ListItemBinding binding = (ListItemBinding) DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.list_item,
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ListItemBinding binding = ListItemBinding.inflate(
+                LayoutInflater.from(parent.getContext()),
                 parent,
                 false);
-        return new ViewHolder(binding);
+        return new ItemViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(ReAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.binding.setItem(items.get(position));
+        holder.binding.executePendingBindings();
     }
 
     @Override
@@ -54,22 +55,25 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ViewHolder> {
         return items.size();
     }
 
-    @BindingAdapter({"imageUrl"})
-    public static void loadImage(ImageView imageView, String imageUrl) {
-        Picasso.with(imageView.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.placeholder)
-                .into(imageView);
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         ListItemBinding binding;
 
-        public ViewHolder(ListItemBinding binding) {
+        public ItemViewHolder(ListItemBinding binding) {
             super(binding.cardView);
             this.binding = binding;
         }
+    }
 
-
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView infoImage, String image) {
+        try {
+            Picasso.with(infoImage.getContext())
+                    .load(image)
+                    .resize(100, 100)
+                    .placeholder(R.drawable.placeholder)
+                    .into(infoImage);
+        } catch (Exception e) {
+            Log.e("Picasso error", e.getMessage());
+        }
     }
 }
