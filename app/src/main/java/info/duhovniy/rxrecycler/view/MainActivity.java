@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpRecyclerView(RecyclerView recyclerView) {
         ReAdapter adapter = new ReAdapter(generateList());
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -45,7 +45,7 @@ public class ReAdapter extends RecyclerView.Adapter<ReAdapter.ItemViewHolder> {
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.binding.setItem(items.get(position));
-        holder.binding.executePendingBindings();
+//        holder.binding.executePendingBindings();
     }
 
     @Override
